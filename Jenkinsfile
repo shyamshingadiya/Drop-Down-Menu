@@ -7,8 +7,22 @@ pipeline {
       }
     }
     stage('Unit Test') {
-      steps {
-        git(url: 'https://github.com/shyamshingadiya/Drop-Down-Menu/', branch: 'master', changelog: true)
+      parallel {
+        stage('Unit Test') {
+          steps {
+            build 'QA'
+          }
+        }
+        stage('') {
+          steps {
+            build 'Sears_QA'
+          }
+        }
+        stage('') {
+          steps {
+            build 'SHC_QA'
+          }
+        }
       }
     }
   }
